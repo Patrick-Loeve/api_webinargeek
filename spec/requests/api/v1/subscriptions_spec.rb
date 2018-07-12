@@ -11,12 +11,8 @@ RSpec.describe 'Items API', type: :request do
   let(:id) { subscription.id }
   let(:headers) { valid_headers }
 
-  it 'get a list subscriptions' do
-    get '/api/v1/subscriptions'
-    json = JSON.parse(response.body)
-    expect(json.size).to eq(1)    
-  end
-
+  # GET subsription/:id
+ 
   describe 'GET /api/v1/subscriptions/:id' do
     before { get "/api/v1/subscriptions/#{id}" }
 
@@ -32,21 +28,21 @@ RSpec.describe 'Items API', type: :request do
     end
   end
 
+ # POST subscription
   describe 'POST /api/v1/subscriptions' do
-    let(:valid_attributes) { {  firstname: 'Patrick', surname: 'Loeve', email: 'loevepatrick@hireme.com', watched: false, registration_ip: "127001", broadcast_id: 1  } }
+    let(:valid_attributes) { {  firstname: 'Patrick', surname: 'Loeve', email: 'patrickloeve@hireme.com', watched: false, registration_ip: "127001", broadcast_id: 1  } }
     let(:invalid_attributes)  { {} }
-
     context 'when request attributes are valid' do
 
       before do
          post "/api/v1/subscriptions", params: valid_attributes
-
       end
 
-     it 'returns status code 200' do
+      it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
     end
+
     context 'when an invalid request' do
       before do
         post "/api/v1/subscriptions", params: invalid_attributes
@@ -55,10 +51,6 @@ RSpec.describe 'Items API', type: :request do
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
-
-
     end
   end
-
-
 end

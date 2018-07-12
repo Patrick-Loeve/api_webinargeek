@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_221520) do
+ActiveRecord::Schema.define(version: 2018_07_12_074454) do
 
   create_table "broadcasts", force: :cascade do |t|
     t.datetime "broadcast_date"
     t.integer "episode_id"
-    t.integer "subscriptions_count"
+    t.integer "subscriptions_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["episode_id"], name: "index_broadcasts_on_episode_id"
